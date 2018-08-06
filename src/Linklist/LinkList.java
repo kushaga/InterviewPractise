@@ -1,12 +1,5 @@
 package Linklist;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.function.IntUnaryOperator;
-import java.util.stream.IntStream;
-
 public class LinkList {
     public static class Node {
         int num;
