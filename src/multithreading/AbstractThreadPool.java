@@ -15,6 +15,7 @@ public class AbstractThreadPool {
         taskQueue = new LinkedBlockingQueue<>(maxTaks);
         IntStream.range(0, maxthreads).mapToObj(value -> new PoolThread(taskQueue))
                         .forEach(poolThread -> threads.add(poolThread));
+        int [] a= {};
         for (PoolThread thread : threads) {
             thread.start();
         }
