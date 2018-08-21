@@ -1,33 +1,33 @@
 import java.util.Stack;
 
 public class LongestValidParentheses {
-    public int longestValidParentheses(String s) {
-        int max = 0;
-
-        Stack<Character> stack = new Stack<>();
-        int cur = 0;
-        for (Character c : s.toCharArray()) {
-            if (stack.isEmpty()) {
-                stack.push(c);
+    public int longestValidParentheses(String str) {
+        int n = str.length();
+        // Create a stack and push -1 as initial index to it.
+        Stack<Integer> stk = new Stack<>();
+        stk.push(-1);
+        // Initialize result
+        int result = 0;
+        for (int i = 0; i < n; i++) {
+            if (str.charAt(i) == '(') {
+                stk.push(i);
             } else {
-
-                if (c == '(') {
-                    stack.push(c);
+                // Pop the previous opening bracket's index
+                stk.pop();
+                // Check if this length formed with base of
+                // current valid substring is more than max
+                // so far
+                if (!stk.empty()) {
+                    result = Math.max(result, i - stk.peek());
+                } else {
+                    // If stack is empty. push current index as
+                    // base for next valid substring (if any)
+                    stk.push(i);
                 }
-
-                if (c == ')') {
-                    if (stack.peek() == '(') {
-                        stack.pop();
-                        cur = cur + 2;
-                        max = Math.max(max, cur);
-                    } else {
-                        stack.push(c);
-                    }
-                }
-
             }
         }
-        return max;
+
+        return result;
     }
 
     public static void main(String args[]) {
@@ -35,5 +35,6 @@ public class LongestValidParentheses {
         System.out.println(longestValidParentheses.longestValidParentheses("(()"));
         System.out.println(longestValidParentheses.longestValidParentheses(")()())"));
         System.out.println(longestValidParentheses.longestValidParentheses("()(())"));
+        System.out.println(longestValidParentheses.longestValidParentheses("()(()"));
     }
 }
